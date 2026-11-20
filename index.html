@@ -1,0 +1,99 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>이우주 — Woozoo</title>
+<meta name="description" content="이우주 — 프로덕트 기획·디자인 리드. 작업, 태산과 만든 작업, AI와 일하는 노트.">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..600&family=IBM+Plex+Mono:wght@400;500&family=Noto+Serif+KR:wght@400;500&display=swap">
+<link rel="stylesheet" href="brand.css"></head><body>
+<style>/* ── 표지 컨셉: Blur → Grid → Form (portfolio-cover 원본 이식) ── */
+.cv{--col:8.3333cqw;position:relative;aspect-ratio:16/9;width:100%;overflow:hidden;container-type:inline-size;background:var(--paper);color:var(--ink)}
+.cv > *{position:absolute;margin:0}
+.cv .field{left:-12cqw;top:-20%;width:var(--fw,64cqw);height:140%;filter:blur(5.5cqw) saturate(var(--sat,1));opacity:var(--fo,.88);
+  background:radial-gradient(closest-side at 62% 34%,var(--g1),transparent),radial-gradient(closest-side at 40% 70%,var(--g2),transparent),
+  radial-gradient(closest-side at 74% 80%,var(--g3),transparent),radial-gradient(closest-side at 34% 22%,#F4C59A,transparent);
+  -webkit-mask-image:linear-gradient(90deg,#000 45%,transparent 100%);mask-image:linear-gradient(90deg,#000 45%,transparent 100%)}
+/* 눈금: 반복 그라데이션은 칸 폭이 소수 px 이면 큰 화면에서 선이 사라져, 칸마다 1px 막대를 따로 둔다 */
+.cv .ticks{left:0;right:0;height:max(8px,.8cqw);opacity:.6}
+.cv .ticks i{position:absolute;top:0;bottom:0;left:round(calc(var(--col)*var(--i)),1px);width:1px;background:var(--ink)}
+@supports not (width:round(1px,1px)){.cv .ticks i{left:calc(var(--col)*var(--i))}}
+.cv .ticks i:last-child{left:auto;right:0}
+.cv .ticks.t{top:1.5cqw}.cv .ticks.b{bottom:1.5cqw}
+.cv .m{font-family:"IBM Plex Mono",var(--mono);font-size:1.2cqw;letter-spacing:.08em;text-transform:uppercase;line-height:1.55}
+.cv .m b{display:block;font-family:var(--sans);font-weight:600;font-size:1.6cqw;letter-spacing:.01em;text-transform:none}
+.cv .tl{left:var(--col);top:7.5%}.cv .tr{right:var(--col);top:7.5%;text-align:right}
+.cv .bl{left:var(--col);bottom:7.5%}.cv .br{right:var(--col);bottom:7.5%;text-align:right}
+.cv .base{left:0;right:0;height:0;border-top:1px solid var(--ink)}
+.cv .ko{left:var(--col);font-family:"Noto Serif KR",serif;font-weight:400;font-size:1.7cqw;letter-spacing:-.01em}
+/* 줄무늬는 정수 픽셀로 스냅하고, 막대와 틈을 비슷한 폭으로 둬 긁힌 선이 아니라 의도한 줄무늬로 읽히게 한다 */
+.cv{--sp:calc(var(--col)/8);--sb:calc(var(--col)/8*.55)}
+@supports (width:round(1px,1px)){.cv{--sp:round(calc(var(--col)/8),1px);--sb:round(calc(var(--col)/8*.55),1px)}}
+/* --t(0→1)가 번짐 구간 중심 --x를 단어 왼쪽 끝→오른쪽 끝으로 옮긴다. 0이면 정적 표지와 같다 */
+@property --t{syntax:"<number>";inherits:true;initial-value:0}
+.cv .word{left:var(--col);display:grid;font-family:"Bodoni Moda",Didot,Georgia,serif;font-weight:500;line-height:1;letter-spacing:-.02em;white-space:nowrap;--x:calc(var(--t)*100%);--bi:max(0%,calc(var(--b1) - 6%));
+  --band:linear-gradient(90deg,transparent calc(var(--x) - var(--c2)),#000 calc(var(--x) - var(--c1)),#000 calc(var(--x) - var(--b2)),transparent calc(var(--x) - var(--bi)),transparent calc(var(--x) + var(--bi)),#000 calc(var(--x) + var(--b2)),#000 calc(var(--x) + var(--c1)),transparent calc(var(--x) + var(--c2)))}
+@supports (width:round(1px,1px)){.cv .word{left:round(var(--col),1px)}}
+.word span{grid-area:1/1;display:block}
+.word .l1,.word .l2{background:linear-gradient(100deg,var(--g1) 0%,#F29A63 18%,var(--g2) 42%,var(--g3) 62%,var(--g4) 85%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.word .l1{filter:blur(var(--blur,.22cqw));
+  --m1:linear-gradient(90deg,transparent calc(var(--x) - var(--b2)),#000 calc(var(--x) - var(--b1)),#000 calc(var(--x) + var(--b1)),transparent calc(var(--x) + var(--b2)));
+  -webkit-mask-image:var(--m1);mask-image:var(--m1)}
+.word .l2{--st:repeating-linear-gradient(90deg,#000 0 var(--sb),transparent var(--sb) var(--sp));
+  -webkit-mask-image:var(--st),var(--band);-webkit-mask-composite:source-in;
+  mask-image:var(--st),var(--band);mask-composite:intersect}
+.word .l3{color:var(--ink);
+  --m3:linear-gradient(90deg,#000 calc(var(--x) - var(--c2)),transparent calc(var(--x) - var(--c1)),transparent calc(var(--x) + var(--c1)),#000 calc(var(--x) + var(--c2)));
+  -webkit-mask-image:var(--m3);mask-image:var(--m3)}
+/* 메인 표지: 뒤 원과 번짐 구간이 좌→우→좌로 함께 이동 */
+.hero{--sat:.85;--sweep:66cqw}
+.hero .field{transform:translateX(calc(var(--t) * var(--sweep)));
+  -webkit-mask-image:radial-gradient(closest-side,#000 55%,transparent 100%);mask-image:radial-gradient(closest-side,#000 55%,transparent 100%)}
+@keyframes sweep{from{--t:0}to{--t:1}}
+.hero.live{animation:sweep 14s cubic-bezier(.45,0,.55,1) infinite alternate}
+.hero.live.off{animation-play-state:paused}
+.hero .word{top:27%;font-size:17.6cqw;--b1:14%;--b2:36%;--c1:50%;--c2:70%}
+.hero.live .word{--b1:9%;--b2:22%;--c1:32%;--c2:46%}
+@media (prefers-reduced-motion:reduce){.hero.live{animation:none}}
+.hero .base{top:calc(27% + 15.175cqw)}
+/* 기준선은 글자 바탕선(Bodoni Moda 17.6cqw 의 바탕선 = 글자 위 15.175cqw)에 맞추고 정수 px 로 내림 없이 올림해 획을 가로지르지 않게 한다 */
+@supports (top:round(up,1px,1px)){.hero .base{top:round(up,calc(27% + 15.175cqw),1px)}}
+.hero .ko{top:calc(27% + 18.3cqw)}
+
+</style>
+<nav class="bnav" aria-label="사이트"><div class="bw"><a class="home" href="index.html" aria-label="이우주 홈"><i aria-hidden="true">✱</i><span>이우주</span></a><ul><li><a href="work/">Work</a></li><li><a href="taesan/">With Taesan</a></li><li><a href="notes/">Notes</a></li><li class="ab"><a href="index.html#about">About</a></li></ul></div></nav>
+<header class="cv hero live" aria-label="이우주 브랜드 표지">
+ <div class="field" aria-hidden="true"></div>
+ <div class="ticks t" aria-hidden="true"><i style="--i:0"></i><i style="--i:1"></i><i style="--i:2"></i><i style="--i:3"></i><i style="--i:4"></i><i style="--i:5"></i><i style="--i:6"></i><i style="--i:7"></i><i style="--i:8"></i><i style="--i:9"></i><i style="--i:10"></i><i style="--i:11"></i><i style="--i:12"></i></div><div class="ticks b" aria-hidden="true"><i style="--i:0"></i><i style="--i:1"></i><i style="--i:2"></i><i style="--i:3"></i><i style="--i:4"></i><i style="--i:5"></i><i style="--i:6"></i><i style="--i:7"></i><i style="--i:8"></i><i style="--i:9"></i><i style="--i:10"></i><i style="--i:11"></i><i style="--i:12"></i></div>
+ <p class="m tl">Woozoo — 2026</p>
+ <p class="m tr">Product Design × PM<br>CPO</p>
+ <h1 class="word" aria-label="Woozoo"><span class="l1" aria-hidden="true">Woozoo</span><span class="l2" aria-hidden="true">Woozoo</span><span class="l3">Woozoo</span></h1>
+ <div class="base" aria-hidden="true"></div>
+ <p class="ko">비즈니스로 이어지는 흐름을 설계합니다.</p>
+ <p class="m bl"><b>이우주</b>Strategy · Design · Culture</p>
+ <p class="m br">Work · With Taesan · Notes<br>03</p>
+</header>
+<main>
+<section class="doors bw" aria-labelledby="doors-h">
+ <div class="sec-h"><h2 id="doors-h">둘러보기</h2><span class="mono dim">Three rooms</span></div>
+ <div class="door-grid"><a class="door d1" href="work/"><div class="card" aria-hidden="true"><div class="f"></div><div class="tk"></div>
+<span class="n">01 — Work</span><span class="ar">→</span><span class="w">Work</span><span class="ln"></span></div>
+<h3>작업</h3><p>기획과 디자인을 맡은 대표 사례 7개와 그 외 작업 56건.</p><span class="mono meta">Selected 7 · Etc 56</span></a><a class="door d2" href="taesan/"><div class="card" aria-hidden="true"><div class="f"></div><div class="tk"></div>
+<span class="n">02 — Taesan</span><span class="ar">→</span><span class="w">Taesan</span><span class="ln"></span></div>
+<h3>태산과 만든 작업</h3><p>AI 동료 태산과 함께 만든 사이트, 문서, 기획. 무엇을 누가 맡았는지까지 남깁니다.</p><span class="mono meta">Projects 7</span></a><a class="door d3" href="notes/"><div class="card" aria-hidden="true"><div class="f"></div><div class="tk"></div>
+<span class="n">03 — Notes</span><span class="ar">→</span><span class="w">Notes</span><span class="ln"></span></div>
+<h3>노트</h3><p>AI와 일하는 지침과 스킬을 만들고 고쳐 온 과정을 기록합니다.</p><span class="mono meta">Posts 11</span></a></div>
+</section>
+<section id="about" class="about bw" aria-labelledby="about-h">
+ <div class="ab-grid"><div><p class="mono dim">About</p><h2 id="about-h" class="mono" style="margin-top:8px">이우주 · CPO</h2></div>
+ <div><p class="ab-lead">제품의 방향을 세우고, 조직이 같은 곳을 보게 만듭니다.<br><span>13년 동안 쇼핑몰·브랜드 웹에서 IoT 앱, 헬스케어, 관리 콘솔, 학습 플랫폼까지 기획과 디자인을 함께 해 왔습니다.</span></p>
+ <ul class="ab-prin"><li><span class="mono dim">01</span><b>목적을 앞에 둡니다</b><p>고객이 이루려는 목적과 사용자가 쓰려는 목적을 먼저 붙잡고, 요청대로 했을 때의 리스크와 대안을 숨기지 않고 설명합니다.</p></li><li><span class="mono dim">02</span><b>판단은 근거로 설명합니다</b><p>기획과 디자인에는 정답이 없기에, 누가 물어도 왜 이렇게 했는지 설명할 수 있게 설계합니다.</p></li><li><span class="mono dim">03</span><b>기억보다 기록을 믿습니다</b><p>구두·회의·통화를 모두 남기고, 확실하다고 생각해도 기록을 먼저 확인한 뒤 말합니다.</p></li><li><span class="mono dim">04</span><b>주장보다 공유를 지향합니다</b><p>모두가 동의하지 않아도, 왜 그렇게 정했고 지금 어떤 흐름인지는 모두가 알도록 공유합니다.</p></li></ul>
+ <div class="career"><p class="mono dim" style="margin-bottom:16px">Career — 13 years</p><dl><div><dt>2021.05 — 현재</dt><dd><b>주식회사 웨이블</b></dd><dd class="r">CPO · PD팀장. 프로덕트 기획·디자인 리드, 디자인 시스템, 팀·조직 운영</dd></div><div><dt>2019.10 — 2021.05</dt><dd><b>유미스 (현 웨이블)</b></dd><dd class="r">PD팀장. 동업 계약으로 합류, 사내 문화 정의</dd></div><div><dt>2019.10 — 2020.02</dt><dd><b>코웍시스</b></dd><dd class="r">프리랜서. 마이크로 웹·앱 기획·디자인</dd></div><div><dt>2016.10 — 2019.10</dt><dd><b>Digitalworks</b></dd><dd class="r">브랜드 웹·앱 운영 디자인, 신규 사이트 기획·디자인</dd></div><div><dt>2014.04 — 2016.05</dt><dd><b>샤샤레코드</b></dd><dd class="r">프리랜서. 레이블 아티스트 비주얼 디렉팅</dd></div><div><dt>2012.02 — 2014.03</dt><dd><b>미니치치</b></dd><dd class="r">쇼핑몰 운영 디자인, 모델 컨셉 촬영</dd></div></dl></div>
+ <p class="contact"><span class="mono">Contact</span><a href="tel:010-9974-9780">010-9974-9780</a><span class="mono">Kakaotalk</span><span>iiiwv</span></p>
+ </div></div>
+</section>
+</main>
+<footer class="foot"><div class="bw"><span class="mono">© 2026 이우주 · Woozoo</span><span class="mono">Strategy · Design · Culture</span></div></footer>
+<script>
+(function(){const m=document.querySelector('.cv.hero.live');if(!m||!('IntersectionObserver' in window))return;
+new IntersectionObserver(e=>m.classList.toggle('off',!e[0].isIntersecting)).observe(m)})();
+</script></body></html>
