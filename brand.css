@@ -5,6 +5,7 @@
  --serif:"Bodoni Moda",Didot,Georgia,serif}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
+[id]{scroll-margin-top:72px}
 body{font-family:var(--sans);color:var(--ink);background:#fff;-webkit-font-smoothing:antialiased;letter-spacing:-.01em;word-break:keep-all;overflow-wrap:break-word}
 p,li,dd{text-wrap:pretty}h1,h2,h3{text-wrap:balance}
 a{color:inherit;text-decoration:none}
@@ -107,6 +108,14 @@ body.case .bnav{position:static}
 .roles p{font-size:14px;line-height:1.6}
 .pj .go{display:inline-block;margin-top:24px;font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;border-bottom:1px solid var(--ink);padding-bottom:3px}
 
+/* ── 자잘하게 만든 것 ── */
+.small{padding-top:96px}
+.sm-grid{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 32px;border-top:1px solid var(--ink)}
+.sm-grid li{padding:24px 0;border-bottom:1px solid var(--line)}
+.sm-grid .mono{color:var(--dim)}
+.sm-grid h3{font-size:17px;font-weight:600;letter-spacing:-.02em;margin:8px 0 6px}
+.sm-grid p{font-size:14px;line-height:1.65;color:#5d5d5d}
+
 /* ── 노트 목록 ── */
 .notes{padding-top:24px;padding-bottom:120px}
 .nt{display:grid;grid-template-columns:140px 1fr 40px;gap:32px;align-items:baseline;padding:32px 0;border-bottom:1px solid var(--line);transition:padding .3s}
@@ -138,7 +147,7 @@ body.case .bnav{position:static}
 .foot .mono{color:var(--dim)}
 
 @media (max-width:1000px){
- .ct-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .ct-grid,.sm-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
  .ab-grid,.pj{grid-template-columns:1fr;gap:20px}
  .career dl div{grid-template-columns:140px 1fr}
  .career dd.r{grid-column:2}
@@ -155,7 +164,7 @@ body.case .bnav{position:static}
  .ab-prin{grid-template-columns:1fr}
  .career dl div{grid-template-columns:1fr;gap:4px}
  .career dd.r{grid-column:auto}
- .ct-grid{grid-template-columns:minmax(0,1fr)}
+ .ct-grid,.sm-grid{grid-template-columns:minmax(0,1fr)}
  .roles{grid-template-columns:1fr}
  .nt{grid-template-columns:1fr;gap:6px}
  .nt .ar{display:none}
